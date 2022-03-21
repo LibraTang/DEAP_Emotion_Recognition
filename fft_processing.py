@@ -8,7 +8,7 @@ window_size = 256  # Averaging band power of 2 sec
 step_size = 16  # Each 0.125 sec update once
 sample_rate = 128  # Sampling rate of 128 Hz
 subjectList = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16',
-               '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31','32']  # List of subjects
+               '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32']  # List of subjects
 
 
 def FFT_Processing(sub, channel, band, window_size, step_size, sample_rate):

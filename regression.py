@@ -2,10 +2,10 @@ import numpy as np
 from sklearn.preprocessing import normalize
 from sklearn.ensemble import RandomForestRegressor
 
-with open('out\data_training.npy', 'rb') as fileTrain:
+with open('out\\data_training.npy', 'rb') as fileTrain:
     data_train = np.load(fileTrain)
 
-with open('out\label_training.npy', 'rb') as fileTrainL:
+with open('out\\label_training.npy', 'rb') as fileTrainL:
     data_train_label = np.load(fileTrainL)
 
 data_train = normalize(data_train)
@@ -16,10 +16,10 @@ Valence_Train = np.ravel(data_train_label[:, [1]])
 Domain_Train = np.ravel(data_train_label[:, [2]])
 Like_Train = np.ravel(data_train_label[:, [3]])
 
-with open('out\data_testing.npy', 'rb') as fileTest:
+with open('out\\data_validation.npy', 'rb') as fileTest:
     data_test = np.load(fileTest)
 
-with open('out\label_testing.npy', 'rb') as fileTestL:
+with open('out\\label_validation.npy', 'rb') as fileTestL:
     data_test_label = np.load(fileTestL)
 
 data_test = normalize(data_test)
@@ -31,7 +31,7 @@ Domain_Test = np.ravel(data_test_label[:, [2]])
 Like_Test = np.ravel(data_test_label[:, [3]])
 
 
-def test(data_test, data_test_label, model):
+def recognize(data_test, data_test_label, model):
     """
     arguments:  data_test: testing dataset
                 data_test_label: testing dataset label
@@ -54,22 +54,26 @@ def test(data_test, data_test_label, model):
         elif output[i] < 5 and label[i] < 5:
             l = l + 1
 
-    print("classification accuracy:", l / len(label), l, len(label))
+    print("classification accuracy: ", l / len(label), l, len(label))
 
 
 # start emotion recognition
 Val_R = RandomForestRegressor(n_estimators=512, n_jobs=6)
 Val_R.fit(data_train[0:468480:32], Valence_Train[0:468480:32])
-test(data_test, Valence_Test, Val_R)
+print("-----Valence-----")
+recognize(data_test, Valence_Test, Val_R)
 
 Aro_R = RandomForestRegressor(n_estimators=512, n_jobs=6)
 Aro_R.fit(data_train[0:468480:32], Arousal_Train[0:468480:32])
-test(data_test, Arousal_Test, Aro_R)
+print("-----Arousal-----")
+recognize(data_test, Arousal_Test, Aro_R)
 
 Dom_R = RandomForestRegressor(n_estimators=512, n_jobs=6)
 Dom_R.fit(data_train[0:468480:32], Domain_Train[0:468480:32])
-test(data_test, Domain_Test, Dom_R)
+print("-----Domain-----")
+recognize(data_test, Domain_Test, Dom_R)
 
 Lik_R = RandomForestRegressor(n_estimators=512, n_jobs=6)
 Lik_R.fit(data_train[0:468480:32], Like_Train[0:468480:32])
-test(data_test, Like_Test, Lik_R)
+print("-----Like-----")
+recognize(data_test, Like_Test, Lik_R)
