@@ -2,7 +2,7 @@ import pickle
 import numpy as np
 import pyeeg as pe
 
-channel = [1, 2, 3, 4, 6, 11, 13, 17, 19, 20, 21, 25, 29, 31]  # 14 Channels chosen to fit Emotive Epoch+
+channel = [2, 3, 4, 5, 8, 12, 14, 18, 20, 21, 22, 26, 30, 32]
 band = [4, 8, 12, 16, 25, 45]  # 5 bands
 window_size = 256  # Averaging band power of 2 sec
 step_size = 16  # Each 0.125 sec update once
