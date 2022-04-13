@@ -2,7 +2,7 @@ import pickle
 import numpy as np
 import pyeeg as pe
 
-channel = [2, 3, 4, 5, 8, 12, 14, 18, 20, 21, 22, 26, 30, 32]
+channel = [1, 11, 14, 17, 25, 29, 32]  # 7 channels
 band = [4, 8, 12, 16, 25, 45]  # 5 bands
 window_size = 256  # Averaging band power of 2 sec
 step_size = 16  # Each 0.125 sec update once
